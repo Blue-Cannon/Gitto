@@ -1,0 +1,50 @@
+# ==========================================
+# Gitto Platform Storage Databases
+# ==========================================
+# Exclude the server's repository hosting folders
+git/
+.gitto/
+
+# Exclude any local test sandboxes created during development
+*.git
+sample.txt
+test.txt
+app.py
+
+# ==========================================
+# Python Environment & Cache
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv
+venv/
+ENV/
+env/
+
+# ==========================================
+# OS & System Artifacts (Termux / Android / Linux)
+# ==========================================
+.DS_Store
+.directory
+.bash_history
+
+# ==========================================
+# Logs, Packaging, and Diagnostics
+# ==========================================
+*.log
+.pypirc
+build/
+dist/
+*.egg-info/
+
+# ==========================================
+# Local Ide & Text Editor Metadata (Termux/Nano)
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*~
+.nano_history
+
