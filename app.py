@@ -91,9 +91,7 @@ class Repository:
             return {}
 
 
-# HTTP API endpoints for simple operations. These are intentionally tiny and
-aim to provide a deployable surface for Vercel. The Vercel Python builder can
-deploy a single app.py as a serverless function.
+# HTTP API endpoints for simple operations. These are intentionally tiny and aim to provide a deployable surface for Vercel. The Vercel Python builder can deploy a single app.py as a serverless function.
 
 @app.route("/api/init", methods=["POST"])
 def http_init():
