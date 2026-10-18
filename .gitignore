@@ -219,5 +219,7 @@ temp/
 
 # Gitto
 .gitto/
-.git[TO]
 .env.gitto
+gitto.out
+gitto.in
+gitto.db
