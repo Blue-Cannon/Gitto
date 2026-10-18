@@ -1,0 +1,43 @@
+{
+  "name": "blue-cannon/gitto",
+  "description": "Official PHP Gitto Package.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": ["laravel", "package"],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+
+  "repositories": [
+    { "type": "vcs", "url": "https://github.com/vendor/dependency-one.git" },
+    { "type": "vcs", "url": "git@github.com:vendor/private-dependency.git" },
+    { "type": "vcs", "url": "https://gitlab.com/vendor/dependency-gitlab.git" },
+    { "type": "vcs", "url": "https://bitbucket.org/vendor/dependency-bitbucket.git" }
+  ],
+
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0|^12.0",
+    "vendor/dependency-one": "dev-main",
+    "vendor/private-dependency": "^1.0",
+    "vendor/dependency-gitlab": "dev-develop",
+    "vendor/dependency-bitbucket": "v2.1.0"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "Blue-Cannon\\Gitto\\": "src/"
+    }
+  },
+
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Blue-Cannon\\Gitto\\GittoPackageServiceProvider"
+      ]
+    }
+  },
+
+  "config": {
+    "sort-packages": true
+  }
+}
