@@ -21,6 +21,7 @@
     "vendor/private-dependency": "^1.0",
     "vendor/dependency-gitlab": "dev-develop",
     "vendor/dependency-bitbucket": "v2.1.0"
+    "symfony/console": "^6.4"
   },
 
   "autoload": {
