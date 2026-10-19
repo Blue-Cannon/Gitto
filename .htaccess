@@ -1,0 +1,98 @@
+# =================================================
+# Gitto - Full .htaccess for CapRover / Railway
+# Supports: Web UI + Git Smart HTTP + Persistent /repos
+# =================================================
+
+Options -Indexes
+RewriteEngine On
+RewriteBase /
+
+# --- Security: Hide sensitive files ---
+<FilesMatch "^\.(env|git|htaccess|htpasswd)$">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^(composer\.json|composer\.lock|Dockerfile|captain-definition)$">
+    Require all denied
+</FilesMatch>
+
+# --- Protect repos/ and data/ from direct HTTP ---
+# Git access MUST go via git/protocol.php, not direct
+RewriteRule ^repos/ - [F,L]
+RewriteRule ^data/ - [F,L]
+
+# --- GIT SMART HTTP PROTOCOL ---
+# Clone URLs: https://gitto.cu.ma/git/myrepo.git
+# Also: https://gitto.cu.ma/myrepo.git
+
+# Allow git clients to bypass front controller
+RewriteCond %{QUERY_STRING} service=git-(upload|receive)-pack [OR]
+RewriteCond %{REQUEST_URI} git-(upload|receive)-pack
+RewriteRule ^ - [E=GIT_REQUEST:1]
+
+# 1. With /git/ prefix
+RewriteRule ^git/([^/]+\.git)/info/refs$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+RewriteRule ^git/([^/]+\.git)/git-(upload|receive)-pack$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+RewriteRule ^git/([^/]+/[^/]+\.git)/info/refs$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+RewriteRule ^git/([^/]+/[^/]+\.git)/git-(upload|receive)-pack$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+
+# 2. Without /git/ prefix (short URLs)
+RewriteRule ^([^/]+\.git)/info/refs$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+RewriteRule ^([^/]+\.git)/git-(upload|receive)-pack$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+RewriteRule ^([^/]+/[^/]+\.git)/info/refs$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+RewriteRule ^([^/]+/[^/]+\.git)/git-(upload|receive)-pack$ git/protocol.php?repo=$1 [L,QSA,E=GIT:1]
+
+# If it's a git request, stop here
+RewriteCond %{ENV:GIT_REQUEST} 1 [OR]
+RewriteCond %{ENV:GIT} 1
+RewriteRule ^ - [L]
+
+# --- Static assets: don't route ---
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|map)$
+RewriteRule ^ - [L]
+
+# --- Gitto Web UI Routing ---
+# /u/rogge /repo/myrepo /create /settings /api/* -> index.php
+
+# API
+RewriteRule ^api/(.*)$ api/index.php?path=$1 [L,QSA]
+
+# Keep real PHP files accessible (index.php, login.php etc)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} \.php$
+RewriteRule ^ - [L]
+
+# Front Controller for pretty URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+# --- Security Headers ---
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always unset X-Powered-By
+</IfModule>
+
+# --- PHP Settings for Git Push ---
+<IfModule mod_php.c>
+    php_value memory_limit 256M
+    php_value max_execution_time 300
+    php_value upload_max_filesize 100M
+    php_value post_max_size 100M
+</IfModule>
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# --- Cache ---
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
