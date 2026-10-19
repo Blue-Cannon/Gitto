@@ -1,0 +1,6 @@
+services:
+    - type: web
+    name: gitto
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
