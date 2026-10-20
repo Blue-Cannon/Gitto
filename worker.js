@@ -1,3 +1,10 @@
+// © 2026 BlueBixt, All Rights Reserved.
+// The license is under MIT.
+// Description of the File:
+// Deploy to Wrangler with CloudFlare
+// Worker.
+// BlueBixt <newssungoldentoday@gmail.com>
+
 export default {
   async fetch(request, env, ctx) {
     try {
@@ -114,31 +121,12 @@ export default {
           });
           return new Response(JSON.stringify({
             bucket: "gitto",
-            message: "Gitto - Full GitHub Clone on R2",
+            message: "The official R2 Bucket of Gitto.",
             total_objects: overview.objects.length,
             structure: GITTO_TYPES,
             actual_prefix_counts: counts,
-            contains: [
-              "Repository", "Migration", "Fork", "Issues", "Pull Requests", 
-              "Action", "Inbox", "Agents", "Custom Properties", "Repository Setting",
-              "Branches", "Commits", "Releases", "Workflows", "Artifacts",
-              "Projects", "Discussions", "Packages", "Security", "Wiki", "Pages",
-              "and 64+ more..."
-            ],
-            endpoints: {
-              "GET /api/repos": "List repositories",
-              "GET /api/forks?repo=name": "List forks",
-              "GET /api/issues?repo=name": "Issues",
-              "GET /api/pull-requests?repo=name": "PRs",
-              "GET /api/actions?repo=name": "Actions",
-              "GET /api/inbox": "Inbox/Notifications",
-              "GET /api/agents": "Agents",
-              "GET /api/custom-properties": "Custom Properties",
-              "GET /api/migrations": "Migrations",
-              "GET /api/settings?repo=name": "Repo Settings",
-              "POST /api/{type}": "Create new entry (body JSON)",
-              "GET /git/{repo}.git/info/refs": "Git clone"
-            }
+            description: "Gitto is a git platform that are written on PHP and runs on a PHP Framework called Laravel.",
+            developed_by: "Developed by Rogge Ramos",
           }, null, 2), { status: 200, headers: { "Content-Type": "application/json" } });
         }
 
@@ -148,7 +136,7 @@ export default {
           return new Response(JSON.stringify({
             error: `Unknown type: ${typeKey}`,
             known_types: Object.keys(GITTO_TYPES),
-            tip: "Use /api/ to see all 70+ types"
+            tip: "Please go to the official wiki of Gitto."
           }, null, 2), { status: 400, headers: { "Content-Type": "application/json" } });
         }
 
@@ -220,7 +208,80 @@ export default {
       }
 
       // 404
-      return new Response(`<!DOCTYPE html><html><head><title>404 Gitto</title><style>body{font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#fafafb} .card{background:#fff;padding:32px;border-radius:16px;max-width:700px;text-align:center} img{max-width:280px}</style></head><body><div class="card"><img src="/photos/404%20error%20with%20a%20tired%20person-rafiki.png" onerror="this.outerHTML='😴'"><h1>404 - ${path}</h1><p>Bucket <b>gitto</b> has 70+ types. Try <a href="/api/">/api/</a></p><a href="/api/" style="background:#111;color:#fff;padding:10px 16px;border-radius:999px;text-decoration:none">View All Types</a></div></body></html>`, {
+      return new Response(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 - Not Found | Gitto</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:#FFF6EE;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:#231C17;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+  }
+  img{
+    width:100%;
+    max-width:480px;
+    height:auto;
+    margin-bottom:24px;
+  }
+  h1{
+    font-size:clamp(32px,6vw,48px);
+    font-weight:800;
+    letter-spacing:-0.03em;
+    line-height:1;
+  }
+  p{
+    margin-top:12px;
+    font-size:18px;
+    color:#8B7566;
+    max-width:360px;
+    line-height:1.5;
+  }
+  a{
+    margin-top:28px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:48px;
+    padding:0 28px;
+    border-radius:999px;
+    background:#231C17;
+    color:#FFF6EE;
+    text-decoration:none;
+    font-weight:700;
+    font-size:15px;
+  }
+  a:hover{opacity:0.85}
+  footer{
+    margin-top:40px;
+    font-size:12px;
+    color:#C2A99A;
+  }
+</style>
+</head>
+<body>
+
+  <img src="photos/404 error with a tired person-rafiki.png" alt="404 tired person">
+
+  <h1>404 — File Not Found</h1>
+  <p>The page you're looking for is taking a nap. Like this person. 💤</p>
+
+  <a href="/">Go back to Gitto</a>
+
+  <footer>Gitto hit 404!</footer>
+
+</body>
+  </html>`, {
         status: 404, headers: { "Content-Type": "text/html" }
       });
 
