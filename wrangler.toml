@@ -3,19 +3,11 @@ main = "worker.js"
 compatibility_date = "2026-04-20"
 compatibility_flags = ["nodejs_compat"]
 
-description = "Gitto is a git platform developed by Rogge Ramos. Written on PHP and Runs on a PHP Framework called Laravel."
-developed_by = "Developed by Rogge Ramos"
-
 [vars]
-DESCRIPTION = "Gitto is a git platform..."
+DESCRIPTION = "Gitto is a lightweight GitHub clone..."
 DEVELOPED_BY = "Developed by Rogge Ramos"
 BUCKET_NAME = "gitto"
 
 [[r2_buckets]]
 binding = "GITTO"
 bucket_name = "gitto"
-
-[assets]
-directory = "./"
-binding = "ASSETS"
-not_found_handling = "single-page-application"
