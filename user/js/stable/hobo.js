@@ -50,7 +50,7 @@
     // Core: Make GitHub Pages Dynamic
     init(options = {}) {
       this.config = { ...this.config, ...options };
-      this.log(`Hobo ${this.version} init - GitHub Pages is now dynamic`);
+      this.log(`Hey! The dynamic engine was started! At version ${this.version}`);
       
       // Auto-mount dynamic routes
       this.mountRouter();
