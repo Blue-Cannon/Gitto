@@ -1,0 +1,32 @@
+* text=auto eol=lf
+
+
+*.html text eol=lf
+*.htm text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.svg text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.zip binary
+*.pdf binary
+
+
+*.bat text eol=crlf
