@@ -2,7 +2,6 @@ sphinx>=7.0
 myst-parser
 sphinx-nefertiti
 sphinx-copybutton
-sphinx-notfound-page
 sphinxcontrib-youtube
 sphinxcontrib-images
 sphinxcontrib-phpdomain
