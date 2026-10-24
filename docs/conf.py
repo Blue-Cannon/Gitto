@@ -28,6 +28,11 @@ extensions = [
     'sphinx.ext.intersphinx', # link to Python docs
     'sphinx.ext.todo',
     'sphinx_copybutton', # copy button on code blocks
+
+    # Contrib Sphinx
+    "sphinxcontrib.youtube", # For embedding YouTube
+    "sphinxcontrib.images", # For showing a image
+    "sphinxcontrib.phpdomain", # A PHP Domain
 ]
 
 source_suffix = ['.rst', '.md']
@@ -40,7 +45,7 @@ myst_enable_extensions = [
 ]
 
 # Optional but recommended for furo theme
-html_theme = 'furo'
+html_theme = 'sphinx_nefertiti'
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
