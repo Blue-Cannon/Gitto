@@ -6,7 +6,7 @@ use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
 
 // --- CONFIG ---
-$HMAC_KEY = $_ENV['ALTCHA_HMAC_KEY'] ?? 'CHANGE_ME_TO_RANDOM_SECRET_1234567890';
+$HMAC_KEY = $_ENV['ALTCHA_HMAC_KEY'] ?? 'bfb4b63f86a3263106ccd6c9de60823c';
 
 $altcha = new Altcha($HMAC_KEY);
 
