@@ -30,6 +30,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: (root)
+          publish_branch: master
           publish_dir: docs/_build/html
           destination_dir: docs
